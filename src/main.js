@@ -19,13 +19,7 @@ const Menu = {
     }
 }
 
-telegraf.telegram.setMyCommands([
-    { command: "start", description: "Botni ishga tushirish" },
-    { command: "help", description: "Yordam" },
-    { command: "about", description: "Bot haqida" },
-    { command: "menu", description: "Asosiy menyu" },
-    { command: "ping", description: "Bot holatini tekshirish" },
-]);
+
 
 
 telegraf.start((ctx) => {
@@ -85,6 +79,8 @@ telegraf.hears("Bot haqida 👤", (ctx) => {
 telegraf.on("text", async (ctx) => {
     const text = ctx.message.text
 
+    if (text.startsWith("/")) return;
+
     if (text.endsWith("📥")||text.endsWith("ℹ️")||text.endsWith("👤")) {
         return;
     }
@@ -97,7 +93,7 @@ telegraf.on("text", async (ctx) => {
 
     const fileName = `video_${Date.now()}.mp4`
 
-    exec(`yt-dlp -f mp4 -o ${fileName} ${text}`, async (err) => {
+    exec(`yt-dlp -f mp4 -o "${fileName}" "${text}"`, async (err) => {
         await ctx.deleteMessage(loadMessage.message_id)
 
         if (err) {
@@ -112,7 +108,14 @@ telegraf.on("text", async (ctx) => {
 
 })
 
-telegraf.launch()
+ await telegraf.launch()
+ await telegraf.telegram.setMyCommands([
+    { command: "start", description: "Botni ishga tushirish" },
+    { command: "help", description: "Yordam" },
+    { command: "about", description: "Bot haqida" },
+    { command: "menu", description: "Asosiy menyu" },
+    { command: "ping", description: "Bot holatini tekshirish" },
+]);
 console.log('Instagram botimiz ishga tushdi😁');
 
 
