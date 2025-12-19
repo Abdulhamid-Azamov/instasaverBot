@@ -1,0 +1,20 @@
+{
+  "name": "saverbot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node --watch src/main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "dotenv": "^17.2.3",
+    "fs": "^0.0.1-security",
+    "node-telegram-bot-api": "^0.67.0",
+    "telegraf": "^4.16.3"
+  }
+}
