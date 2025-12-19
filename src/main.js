@@ -97,6 +97,8 @@ telegraf.on("text", async (ctx) => {
         await ctx.deleteMessage(loadMessage.message_id)
 
         if (err) {
+            console.log(err);
+            
             ctx.reply("Video olinmadi⛔")
             return;
         }
